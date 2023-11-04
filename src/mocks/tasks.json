@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Это обновленная задача",
+    "info": "Обновленная задача",
+    "isCompleted": true,
+    "isImportant": false,
+    "id": 19
+  },
+  {
+    "name": "Это обновленная задача",
+    "info": "333333",
+    "isCompleted": true,
+    "isImportant": false,
+    "id": 22
+  },
+  {
+    "name": "Это обновленная задача",
+    "info": "Обновленная задача",
+    "isImportant": false,
+    "isCompleted": true,
+    "id": 24
+  },
+  {
+    "name": "some name",
+    "info": "Initial object",
+    "isImportant": true,
+    "isCompleted": false,
+    "id": 25
+  },
+  {
+    "name": "Попрощаться",
+    "info": "poka",
+    "isImportant": false,
+    "isCompleted": true,
+    "id": 26
+  }
+]

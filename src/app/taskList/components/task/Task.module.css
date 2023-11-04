@@ -1,0 +1,31 @@
+.task {
+  margin-top: 5px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 5px;
+  border-bottom: 1px solid rgba(33, 37, 41, 0.25);
+}
+
+.main {
+  flex: 1;
+}
+
+.taskInteractionBtns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .taskInteractionBtns {
+    flex-direction: column;
+  }
+
+  .taskInteractionBtns > button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,7 @@
+.tasks {
+  height: 100%;
+}
+
+.tasks > :last-child {
+  border: none;
+}
