@@ -1,9 +1,9 @@
 import { ButtonProps } from './Button.types';
-import './Button.css';
+import styles from './Button.module.css';
 
-export function Button({ buttonClassName = '', children, ...rest }: ButtonProps) {
+export function Button({ addClassName, children, ...rest }: ButtonProps) {
   return (
-    <button {...rest} className={`customButton ${buttonClassName}`}>
+    <button {...rest} className={`${styles.button} ${addClassName}`}>
       {children}
     </button>
   );

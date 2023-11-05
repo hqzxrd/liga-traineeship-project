@@ -8,12 +8,13 @@ const TaskList = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1>TODO APP</h1>
+        <h1>TODO LIST</h1>
         <SearchForm />
       </header>
       <List />
+
       <Button type="button">
-        <Link to="/task_form">Add Task</Link>
+        <Link to="/task_form">New task</Link>
       </Button>
     </div>
   );

@@ -11,18 +11,18 @@ const TaskForm = () => {
 
   return (
     <form className={styles.form}>
-      <h4>{id ? `Изменить` : `Добавить`} задачу</h4>
+      <h4>{id ? `Change` : `Add`} task</h4>
       <label htmlFor="Title">Title</label>
       <Input onChange={(e) => setName(e.target.value)} value={name} />
       <label htmlFor="Description">Description</label>
       <Input onChange={(e) => setInfo(e.target.value)} value={info} />
       {id ? (
-        <Button type="button" buttonClassName={styles.button}>
-          Изменить
+        <Button addClassName={styles.button} type="button">
+          Change
         </Button>
       ) : (
-        <Button type="button" buttonClassName={styles.button}>
-          Добавить
+        <Button addClassName={styles.button} type="button">
+          Add
         </Button>
       )}
     </form>

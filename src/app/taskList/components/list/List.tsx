@@ -9,8 +9,8 @@ const tasks = data as TTask[];
 const List: FC = () => {
   return (
     <div className={styles.tasks}>
-      {tasks.map((task: TTask) => {
-        return <Task key={task.id} task={task} />;
+      {tasks.map((task: TTask, i) => {
+        return <Task key={task.id} index={i + 1} task={task} />;
       })}
     </div>
   );

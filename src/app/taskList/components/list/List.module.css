@@ -1,7 +1,15 @@
 .tasks {
-  height: 100%;
+  display: flex;
+  flex-flow: column;
+  max-height: 100%;
+  overflow: auto;
 }
 
 .tasks > :last-child {
   border: none;
+}
+
+.empty {
+  text-align: center;
+  height: 100%;
 }

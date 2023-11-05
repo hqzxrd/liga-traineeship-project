@@ -9,7 +9,7 @@ const SearchForm = () => {
   return (
     <form className={styles.searchForm}>
       <Input
-        placeholder="Search"
+        placeholder="Search note..."
         onChange={(e) => setText(e.target.value)}
         value={text}
         onClickReset={() => setText(``)}
@@ -20,7 +20,7 @@ const SearchForm = () => {
         <Button type="button">Done</Button>
         <Button type="button">Important</Button>
       </div>
-      <Button buttonClassName={styles.find}>Find</Button>
+      <Button addClassName={styles.find}>Find</Button>
     </form>
   );
 };

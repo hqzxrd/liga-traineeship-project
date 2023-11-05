@@ -1,16 +1,15 @@
 .search {
   position: relative;
-  max-width: 100%;
   flex: 1;
 }
 
 .searchInput {
   width: 100%;
-  flex-grow: 1;
+  min-height: 34px;
   margin-right: 3px;
   padding-right: 35px;
   border: none;
-  border: 1px solid rgba(33, 37, 41, 0.25);
+  border: 1px solid #7b68ee;
   border-radius: 5px;
 }
 
@@ -18,8 +17,9 @@
 }
 
 .reset {
+  color: #7b68ee;
   position: absolute;
-  top: 2px;
+  top: 4px;
   right: 2px;
   border: none;
   background-color: inherit;
