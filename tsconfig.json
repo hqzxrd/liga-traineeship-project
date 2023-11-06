@@ -36,6 +36,9 @@
       "types/*": ["src/types/*"],
       "utils/*": ["src/utils/*"],
       "pages/*": ["src/pages/*"],
+      "store/*": ["src/store/*"],
+      "providers/*": ["src/providers/*"],
+      "router/*": ["src/router/*"],
       "api/*": ["src/api/*"]
     }
   },
