@@ -20,7 +20,6 @@ const SearchForm = () => {
         <Button type="button">Done</Button>
         <Button type="button">Important</Button>
       </div>
-      <Button addClassName={styles.find}>Find</Button>
     </form>
   );
 };

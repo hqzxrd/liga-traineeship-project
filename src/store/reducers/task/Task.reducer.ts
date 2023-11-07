@@ -17,7 +17,7 @@ const TaskReducer = (state: TTask[] = [], action: TaskAction): TTask[] => {
     }
 
     case TaskActionsType.DELETE: {
-      const filtered = state.filter((task) => task.id === action.payload.id);
+      const filtered = state.filter((task) => task.id !== action.payload);
       return [...filtered];
     }
 

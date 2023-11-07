@@ -20,9 +20,7 @@ interface TaskChangeAction {
 
 interface TaskDeleteAction {
   type: TaskActionsType.DELETE;
-  payload: IDeleteTask;
+  payload: IDeleteTaskId;
 }
 
-interface IDeleteTask {
-  id: number;
-}
+type IDeleteTaskId = number;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckboxProps } from './Checkbox.types';
 
 export function Checkbox({ label, checked, onChange, disabled, containerClassName = '' }: CheckboxProps) {
