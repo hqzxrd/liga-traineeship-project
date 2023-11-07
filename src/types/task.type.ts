@@ -5,3 +5,5 @@ export type TTask = {
   isImportant: boolean;
   id: number;
 };
+
+export type TTaskForm = Omit<TTask, 'isCompleted' | 'id'>;

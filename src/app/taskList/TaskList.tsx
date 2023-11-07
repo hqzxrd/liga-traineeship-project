@@ -11,6 +11,7 @@ const TaskList = () => {
         <h1>TODO LIST</h1>
         <SearchForm />
       </header>
+
       <List />
 
       <Button type="button">

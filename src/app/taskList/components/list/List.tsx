@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import Task from '../task/Task';
 import styles from './List.module.css';
-import data from 'mocks/tasks.json';
 import { TTask } from 'types/task.type';
-
-const tasks = data as TTask[];
+import { useTypedSelector } from 'utils/useTypedSelector';
 
 const List: FC = () => {
+  const tasks = useTypedSelector((state) => state.tasks);
+
   return (
     <div className={styles.tasks}>
       {tasks.map((task: TTask, i) => {
