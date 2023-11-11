@@ -1,11 +1,14 @@
 .task {
   margin-top: 5px;
   padding: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   gap: 5px;
   border-bottom: 1px solid #7b68ee;
+}
+
+.taskWrapper {
+  display: flex;
+  /* justify-content: space-between; */
+  /* align-items: flex-end; */
 }
 
 .main {
@@ -17,7 +20,18 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-bottom: 1rem;
+}
+
+.lables {
+  display: flex;
+  gap: 10px;
+}
+
+.lables div {
+  color: white;
+  padding: 0px 10px;
+  border-radius: 10px;
+  background-color: #7b68ee;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,13 @@
+.loaderWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loader {
+  border-top: 3px solid #7b68ee;
+  border-bottom: 3px solid #7b68ee;
+  border-left: none;
+  border-right: none;
+}

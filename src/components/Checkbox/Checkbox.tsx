@@ -1,10 +1,11 @@
 import { CheckboxProps } from './Checkbox.types';
+import styles from './Checkbox.module.css';
 
 export function Checkbox({ label, checked, onChange, disabled, containerClassName = '' }: CheckboxProps) {
   return (
-    <div className={`form-check mb-3 ${containerClassName}`}>
+    <div className={styles.checkboxWrapper}>
       <input
-        className="form-check-input"
+        className={styles.customCheckbox}
         type="checkbox"
         value=""
         id={label}

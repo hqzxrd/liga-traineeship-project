@@ -1,26 +1,27 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styles from './TaskForm.module.css';
 import { Button } from 'components/Button';
-import { Input } from 'components/Input';
-import { changeTaskAction, createTaskAction } from 'store/actions/Task.action';
 import { useTypedSelector } from 'utils/useTypedSelector';
-import { Checkbox } from 'components/Checkbox';
+import { createTaskThunk, updateTaskThunk } from 'store/task/Task.thunk';
+import { useAppDispatch } from 'store/store';
+import { Input } from 'components/Input/Input';
+import { Checkbox } from 'components/Checkbox/Checkbox';
 
 const TaskForm = () => {
-  const dispatch = useDispatch();
-  const { tasks } = useTypedSelector((state) => state);
+  const dispatch = useAppDispatch();
+  const tasks = useTypedSelector((state) => state.tasks.value);
   const { id } = useParams();
   const nav = useNavigate();
   const [name, setName] = useState(``);
   const [info, setInfo] = useState(``);
   const [isImportant, setIsImportant] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const addTask = () => {
     if (!name && !info) return;
 
-    dispatch(createTaskAction({ name, info, isImportant }));
+    dispatch(createTaskThunk({ name, info, isImportant }));
     nav(`/`, { replace: true });
   };
 
@@ -29,7 +30,7 @@ const TaskForm = () => {
 
     if (id) {
       const taskId = +id;
-      dispatch(changeTaskAction({ id: taskId, name, info, isImportant }));
+      dispatch(updateTaskThunk(taskId, { name, info, isImportant }));
       nav(`/`, { replace: true });
     }
   };
@@ -43,6 +44,7 @@ const TaskForm = () => {
       setName(task.name);
       setInfo(task.info);
       setIsImportant(task.isImportant);
+      setIsCompleted(task.isCompleted);
     });
   }, []);
 
@@ -54,6 +56,7 @@ const TaskForm = () => {
       <label htmlFor="Description">Description</label>
       <Input onChange={(e) => setInfo(e.target.value)} value={info} />
       <Checkbox label="Important" onChange={() => setIsImportant(!isImportant)} checked={isImportant} />
+      <Checkbox label="Complete" onChange={() => setIsCompleted(!isCompleted)} checked={isCompleted} />
       {id ? (
         <Button addClassName={styles.button} type="button" onClick={() => changeTask()}>
           Change

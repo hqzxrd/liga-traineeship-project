@@ -6,4 +6,4 @@ export type TTask = {
   id: number;
 };
 
-export type TTaskForm = Omit<TTask, 'isCompleted' | 'id'>;
+export type TTaskForm = Omit<TTask, 'isCompleted' | `id`>;

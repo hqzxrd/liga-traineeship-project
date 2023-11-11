@@ -1,11 +1,29 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+
+import { useLocation } from 'react-router-dom';
 import Task from '../task/Task';
 import styles from './List.module.css';
 import { TTask } from 'types/task.type';
 import { useTypedSelector } from 'utils/useTypedSelector';
 
+import { useAppDispatch } from 'store/store';
+import { getAllTaskThunk } from 'store/task/Task.thunk';
+import { Loader } from 'components/Loader/Loader';
+
 const List: FC = () => {
-  const tasks = useTypedSelector((state) => state.tasks);
+  const { search } = useLocation();
+  const dispatch = useAppDispatch();
+  const { value: tasks, isLoading } = useTypedSelector((state) => state.tasks);
+
+  useEffect(() => {
+    dispatch(getAllTaskThunk(search));
+  }, []);
+
+  useEffect(() => {
+    dispatch(getAllTaskThunk(search));
+  }, [search]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className={styles.tasks}>
