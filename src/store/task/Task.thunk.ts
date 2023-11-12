@@ -1,5 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
-import { deleteTaskAction, getAllTaskAction, setLoaderAction } from './Task.action';
+import { AxiosError } from 'axios';
+import { deleteTaskAction, errorTaskAction, getAllTaskAction, setLoaderAction } from './Task.action';
 import { TaskApi } from 'api/Task.api';
 import { TRootState } from 'store/store';
 import { TTaskForm } from 'types/task.type';
@@ -7,13 +8,15 @@ import { TTaskForm } from 'types/task.type';
 export const getAllTaskThunk = (query: string): ThunkAction<Promise<void>, TRootState, any, any> => {
   return async (dispatch) => {
     try {
+      dispatch(errorTaskAction(``));
       dispatch(setLoaderAction(true));
 
       const res = await TaskApi.getAll(query);
 
       dispatch(getAllTaskAction(res.data));
     } catch (err) {
-      console.log(err);
+      const error = err as AxiosError;
+      dispatch(errorTaskAction(error.message));
     } finally {
       dispatch(setLoaderAction(false));
     }
@@ -22,19 +25,37 @@ export const getAllTaskThunk = (query: string): ThunkAction<Promise<void>, TRoot
 
 export const createTaskThunk = (task: TTaskForm): ThunkAction<Promise<void>, TRootState, any, any> => {
   return async (dispatch) => {
-    const res = await TaskApi.createTask(task);
+    try {
+      dispatch(errorTaskAction(``));
+      await TaskApi.createTask(task);
+    } catch (err) {
+      const error = err as AxiosError;
+      dispatch(errorTaskAction(error.message));
+    }
   };
 };
 
 export const updateTaskThunk = (id: number, task: TTaskForm): ThunkAction<Promise<void>, TRootState, any, any> => {
   return async (dispatch) => {
-    const res = await TaskApi.updateTask(id, task);
+    try {
+      dispatch(errorTaskAction(``));
+      await TaskApi.updateTask(id, task);
+    } catch (err) {
+      const error = err as AxiosError;
+      dispatch(errorTaskAction(error.message));
+    }
   };
 };
 
 export const deleteTaskThunk = (id: number): ThunkAction<Promise<void>, TRootState, any, any> => {
   return async (dispatch) => {
-    const res = await TaskApi.deleteTask(id);
-    if (res.status === 200) dispatch(deleteTaskAction(id));
+    try {
+      dispatch(errorTaskAction(``));
+      const res = await TaskApi.deleteTask(id);
+      if (res.status === 200) dispatch(deleteTaskAction(id));
+    } catch (err) {
+      const error = err as AxiosError;
+      dispatch(errorTaskAction(error.message));
+    }
   };
 };

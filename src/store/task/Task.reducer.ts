@@ -20,6 +20,9 @@ const TaskReducer = (state = initState, action: TaskAction): TTasksReducer => {
     case TaskActionsType.LOADING:
       return { ...state, isLoading: action.payload };
 
+    case TaskActionsType.ERROR:
+      return { ...state, error: action.payload };
+
     default:
       return state;
   }

@@ -9,11 +9,12 @@ import { useTypedSelector } from 'utils/useTypedSelector';
 import { useAppDispatch } from 'store/store';
 import { getAllTaskThunk } from 'store/task/Task.thunk';
 import { Loader } from 'components/Loader/Loader';
+import Error from 'app/error/Error';
 
 const List: FC = () => {
   const { search } = useLocation();
   const dispatch = useAppDispatch();
-  const { value: tasks, isLoading } = useTypedSelector((state) => state.tasks);
+  const { value: tasks, isLoading, error } = useTypedSelector((state) => state.tasks);
 
   useEffect(() => {
     dispatch(getAllTaskThunk(search));
@@ -22,6 +23,8 @@ const List: FC = () => {
   useEffect(() => {
     dispatch(getAllTaskThunk(search));
   }, [search]);
+
+  if (error) return <Error>{error}</Error>;
 
   if (isLoading) return <Loader />;
 

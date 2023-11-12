@@ -6,28 +6,73 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input/Input';
 
 const SearchForm = () => {
-  const [text, setText] = useState(``);
-  const [seatchParam, setSearchParam] = useSearchParams(``);
+  const [text, setText] = useState('');
+  const [searchParams, setSearchParam] = useSearchParams(``);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchText = e.target.value;
+
+    setText(searchText);
+
+    searchParams.set('name_like', searchText);
+
+    if (!searchText) searchParams.delete('name_like');
+
+    setSearchParam(searchParams);
+  };
+
+  const handleReset = () => {
+    setText(``);
+    searchParams.delete('name_like');
+    setSearchParam(searchParams);
+  };
+
+  const handleClick = (param: string, value: string | number | boolean) => {
+    value = value + ``;
+    searchParams.set(param, value);
+    setSearchParam(searchParams);
+  };
 
   return (
     <form className={styles.searchForm}>
       <Input
         placeholder="Search note..."
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => handleChange(e)}
         value={text}
-        onClickReset={() => setText(``)}
+        onClickReset={() => handleReset()}
       />
       <div className={styles.filterButtons}>
-        <Button type="button" onClick={() => setSearchParam(``)}>
+        <Button
+          type="button"
+          onClick={() => {
+            searchParams.delete('isCompleted');
+            searchParams.delete('isImportant');
+            setSearchParam(searchParams);
+          }}>
           All
         </Button>
-        <Button type="button" onClick={() => setSearchParam(`isCompleted=false`)}>
+        <Button
+          type="button"
+          onClick={() => {
+            searchParams.delete('isImportant');
+            handleClick(`isCompleted`, false);
+          }}>
           Active
         </Button>
-        <Button type="button" onClick={() => setSearchParam(`isCompleted=true`)}>
+        <Button
+          type="button"
+          onClick={() => {
+            searchParams.delete('isImportant');
+            handleClick(`isCompleted`, true);
+          }}>
           Done
         </Button>
-        <Button type="button" onClick={() => setSearchParam(`isImportant=true`)}>
+        <Button
+          type="button"
+          onClick={() => {
+            searchParams.delete('isCompleted');
+            handleClick(`isImportant`, true);
+          }}>
           Important
         </Button>
       </div>

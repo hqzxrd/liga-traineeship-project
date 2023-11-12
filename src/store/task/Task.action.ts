@@ -6,3 +6,5 @@ export const setLoaderAction = (isLoading: boolean) => ({ type: TaskActionsType.
 export const getAllTaskAction = (tasks: TTask[]) => ({ type: TaskActionsType.ALL, payload: tasks });
 
 export const deleteTaskAction = (id: number) => ({ type: TaskActionsType.DELETE, payload: id });
+
+export const errorTaskAction = (errorText: string) => ({ type: TaskActionsType.ERROR, payload: errorText });
