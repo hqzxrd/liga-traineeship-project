@@ -1,11 +1,12 @@
 import { ThunkAction } from 'redux-thunk';
 import { AxiosError } from 'axios';
+import { AnyAction } from 'redux';
 import { deleteTaskAction, errorTaskAction, getAllTaskAction, setLoaderAction } from './Task.action';
 import { TaskApi } from 'api/Task.api';
 import { TRootState } from 'store/store';
 import { TTaskForm } from 'types/task.type';
 
-export const getAllTaskThunk = (query: string): ThunkAction<Promise<void>, TRootState, any, any> => {
+export const getAllTaskThunk = (query: string): ThunkAction<Promise<void>, TRootState, unknown, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
@@ -23,7 +24,7 @@ export const getAllTaskThunk = (query: string): ThunkAction<Promise<void>, TRoot
   };
 };
 
-export const createTaskThunk = (task: TTaskForm): ThunkAction<Promise<void>, TRootState, any, any> => {
+export const createTaskThunk = (task: TTaskForm): ThunkAction<Promise<void>, TRootState, unknown, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
@@ -35,7 +36,10 @@ export const createTaskThunk = (task: TTaskForm): ThunkAction<Promise<void>, TRo
   };
 };
 
-export const updateTaskThunk = (id: number, task: TTaskForm): ThunkAction<Promise<void>, TRootState, any, any> => {
+export const updateTaskThunk = (
+  id: number,
+  task: TTaskForm
+): ThunkAction<Promise<void>, TRootState, unknown, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
@@ -47,7 +51,7 @@ export const updateTaskThunk = (id: number, task: TTaskForm): ThunkAction<Promis
   };
 };
 
-export const deleteTaskThunk = (id: number): ThunkAction<Promise<void>, TRootState, any, any> => {
+export const deleteTaskThunk = (id: number): ThunkAction<Promise<void>, TRootState, unknown, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));

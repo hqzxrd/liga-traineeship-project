@@ -1,24 +1,47 @@
 import axios from 'axios';
 import { URL_TASKS } from 'constants/api.constants';
-import { TTask, TTaskForm } from 'types/task.type';
+import { TTaskAllResponse, TTaskCreateResponse, TTaskDeleteResponse, TTaskUpdateResponse } from 'types/api';
+import { TTaskForm } from 'types/task.type';
+import { arrResponseToArrTask, responseToTask } from 'utils/mapTypes';
 
 export const TaskApi = {
   async getAll(query: string) {
-    const res = await axios.get<TTask[]>(URL_TASKS + query);
-    console.log(res);
+    const res = await axios.get<TTaskAllResponse>(URL_TASKS + query);
 
-    return res;
+    const data = arrResponseToArrTask(res.data);
+
+    const obj = {
+      ...res,
+      data,
+    };
+    return obj;
   },
 
   async createTask(task: TTaskForm) {
-    return await axios.post<TTask>(URL_TASKS, task);
+    const res = await axios.post<TTaskCreateResponse>(URL_TASKS, task);
+
+    const data = responseToTask(res.data);
+
+    const obj = {
+      ...res,
+      data,
+    };
+    return obj;
   },
 
   async updateTask(id: number, task: TTaskForm) {
-    return await axios.patch<TTask>(URL_TASKS + id, task);
+    const res = await axios.patch<TTaskUpdateResponse>(URL_TASKS + id, task);
+
+    const data = responseToTask(res.data);
+
+    const obj = {
+      ...res,
+      data,
+    };
+    return obj;
   },
 
   async deleteTask(id: number) {
-    return await axios.delete(URL_TASKS + id);
+    return await axios.delete<TTaskDeleteResponse>(URL_TASKS + id);
   },
 };

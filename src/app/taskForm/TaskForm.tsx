@@ -21,7 +21,7 @@ const TaskForm = () => {
   const addTask = () => {
     if (!name && !info) return;
 
-    dispatch(createTaskThunk({ name, info, isImportant }));
+    dispatch(createTaskThunk({ name, info, isImportant, isCompleted }));
     nav(`/`, { replace: true });
   };
 
@@ -30,7 +30,7 @@ const TaskForm = () => {
 
     if (id) {
       const taskId = +id;
-      dispatch(updateTaskThunk(taskId, { name, info, isImportant }));
+      dispatch(updateTaskThunk(taskId, { name, info, isImportant, isCompleted }));
       nav(`/`, { replace: true });
     }
   };
