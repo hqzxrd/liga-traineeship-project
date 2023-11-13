@@ -6,3 +6,11 @@
 .button {
   margin-top: 15px;
 }
+
+.error {
+  color: red;
+}
+
+.errorInput {
+  border: 1px solid red;
+}

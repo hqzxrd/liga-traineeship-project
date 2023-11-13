@@ -7,11 +7,14 @@
 
 .taskWrapper {
   display: flex;
-  /* justify-content: space-between; */
-  /* align-items: flex-end; */
+  gap: 5px;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .main {
+  word-break: break-all;
+  max-width: 430px;
   flex: 1;
 }
 

@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './TaskForm.module.css';
@@ -11,6 +11,7 @@ import { useAppDispatch } from 'store/store';
 import { Input } from 'components/Input/Input';
 import { Checkbox } from 'components/Checkbox/Checkbox';
 import { TTaskForm } from 'types/task.type';
+
 const defaultValues: TTaskForm = {
   name: ``,
   info: ``,

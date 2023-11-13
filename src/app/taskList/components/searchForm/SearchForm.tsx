@@ -1,24 +1,28 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './SearchForm.module.css';
 
+import { TSearch } from './SearchForm.types';
+import { validationSchema } from './SearchForm.schema';
 import { Button } from 'components/Button';
 import { Input } from 'components/Input/Input';
 
 const SearchForm = () => {
   const [searchParams, setSearchParam] = useSearchParams(``);
-  const [text, setText] = useState(() => {
-    if (searchParams.get('name_like')) {
-      return searchParams.get('name_like') as string;
-    } else {
-      return ``;
-    }
+
+  const { setValue, control, reset } = useForm<TSearch>({
+    defaultValues: {
+      searchValue: searchParams.get('name_like') ? (searchParams.get('name_like') as string) : ``,
+    },
+    resolver: yupResolver(validationSchema),
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
 
-    setText(searchText);
+    setValue(`searchValue`, searchText);
 
     searchParams.set('name_like', searchText);
 
@@ -28,7 +32,7 @@ const SearchForm = () => {
   };
 
   const handleReset = () => {
-    setText(``);
+    reset();
     searchParams.delete('name_like');
     setSearchParam(searchParams);
   };
@@ -47,11 +51,20 @@ const SearchForm = () => {
 
   return (
     <form className={styles.searchForm}>
-      <Input
-        placeholder="Search note..."
-        onChange={(e) => handleChange(e)}
-        value={text}
-        onClickReset={() => handleReset()}
+      <Controller
+        control={control}
+        name="searchValue"
+        render={({ field, fieldState: { error } }) => (
+          <>
+            <Input
+              placeholder="Search note..."
+              onChange={handleChange}
+              onClickReset={handleReset}
+              value={field.value}
+            />
+            <div className={styles.error}>{error?.message}</div>
+          </>
+        )}
       />
       <div className={styles.filterButtons}>
         <Button
