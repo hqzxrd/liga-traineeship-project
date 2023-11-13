@@ -13,7 +13,7 @@ export function Checkbox({ label, checked, onChange, disabled, containerClassNam
         checked={checked}
         onChange={onChange}
       />
-      <label className="form-check-label" htmlFor={label}>
+      <label className={disabled ? styles.labelDisabled : ``} htmlFor={label}>
         {label}
       </label>
     </div>

@@ -31,3 +31,11 @@
 .customCheckbox:checked {
   background-color: #7b68ee; /* Change background color when checked */
 }
+
+.customCheckbox:disabled {
+  background-color: #dcdcdc; /* Change background color when checked */
+}
+
+.labelDisabled {
+  color: #dcdcdc;
+}
