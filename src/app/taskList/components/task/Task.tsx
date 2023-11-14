@@ -20,8 +20,8 @@ const Task: FC<ITaskProps> = ({ task, index }) => {
           <h4>№{`${index}. ${task.name}`}</h4>
           <p>{task.info}</p>
           <div className={styles.lables}>
-            {task.isCompleted ? <div>Done</div> : <div>Active</div>}
-            {task.isImportant && <div>Important</div>}
+            {task.isCompleted ? <div className={styles.done}>Done</div> : <div className={styles.active}>Active</div>}
+            {task.isImportant && <div className={styles.important}>Important</div>}
           </div>
         </div>
         <div className={styles.taskInteractionBtns}>

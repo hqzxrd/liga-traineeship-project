@@ -1,32 +1,50 @@
 import { TTask } from 'types/task.type';
 
-export type TaskAction = TaskSetErrorAction | LoaderSetAction | TaskGetAllAction | TaskDeleteAction;
+export type TTaskActions =
+  | ITaskSetErrorAction
+  | ILoaderSetAction
+  | ITaskGetAllAction
+  | ITaskCurrentSetAction
+  | ITaskDeleteAction;
 
 export enum TaskActionsType {
+  BY_ID = `GET_BY_ID`,
   ALL = `GET_ALL`,
   DELETE = `DELETE_TASK`,
   LOADING = `SET_LOADING`,
   ERROR = `SET ERROR`,
 }
 
-interface LoaderSetAction {
+interface ILoaderSetAction {
   type: TaskActionsType.LOADING;
   payload: boolean;
 }
 
-interface TaskSetErrorAction {
+interface ITaskSetErrorAction {
   type: TaskActionsType.ERROR;
   payload: string;
 }
 
-interface TaskGetAllAction {
+interface ITaskGetAllAction {
   type: TaskActionsType.ALL;
   payload: TTask[];
 }
 
-interface TaskDeleteAction {
-  type: TaskActionsType.DELETE;
-  payload: IDeleteTaskId;
+interface ITaskCurrentSetAction {
+  type: TaskActionsType.BY_ID;
+  payload: TTask;
 }
 
-type IDeleteTaskId = number;
+interface ITaskDeleteAction {
+  type: TaskActionsType.DELETE;
+  payload: ITaskDeleteId;
+}
+
+type ITaskDeleteId = number;
+
+export type TTasksReducer = {
+  value: TTask[];
+  current: TTask | null;
+  isLoading: boolean;
+  error: string;
+};

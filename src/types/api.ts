@@ -167,6 +167,8 @@ export type external = Record<string, never>;
 
 export type operations = Record<string, never>;
 
+export type TTaskByIdResponse = paths['/tasks/{taskId}'][`get`][`responses`][`200`][`content`][`application/json`];
+
 export type TTaskAllResponse = paths['/tasks'][`get`][`responses`][`200`][`content`][`application/json`];
 
 export type TTaskCreateResponse = paths['/tasks'][`post`][`responses`][`200`][`content`][`application/json`];

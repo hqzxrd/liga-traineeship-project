@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
 import styles from './TaskList.module.css';
 import SearchForm from './components/searchForm/SearchForm';
 import List from './components/list/List';
 import { Button } from 'components/Button';
-import { useTypedSelector } from 'utils/useTypedSelector';
 
-const TaskList = () => {
+const TaskList: FC = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>

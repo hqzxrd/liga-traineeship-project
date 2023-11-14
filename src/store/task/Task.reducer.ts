@@ -1,16 +1,19 @@
-import { TaskAction, TaskActionsType } from './Task.types';
-import { TTasksReducer } from 'store/redux.types';
+import { TTaskActions, TTasksReducer, TaskActionsType } from './Task.types';
 
 const initState: TTasksReducer = {
   value: [],
+  current: null,
   isLoading: false,
   error: ``,
 };
 
-const TaskReducer = (state = initState, action: TaskAction): TTasksReducer => {
+const TaskReducer = (state = initState, action: TTaskActions): TTasksReducer => {
   switch (action.type) {
     case TaskActionsType.ALL:
       return { ...state, value: action.payload };
+
+    case TaskActionsType.BY_ID:
+      return { ...state, current: action.payload };
 
     case TaskActionsType.DELETE: {
       const filtered = state.value.filter((task) => task.id !== action.payload);

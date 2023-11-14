@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { URL_TASKS } from 'constants/api.constants';
-import { TTaskAllResponse, TTaskCreateResponse, TTaskDeleteResponse, TTaskUpdateResponse } from 'types/api';
+import {
+  TTaskAllResponse,
+  TTaskByIdResponse,
+  TTaskCreateResponse,
+  TTaskDeleteResponse,
+  TTaskUpdateResponse,
+} from 'types/api';
 import { TTaskForm } from 'types/task.type';
 import { arrResponseToArrTask, responseToTask } from 'utils/mapTypes';
 
@@ -9,6 +15,18 @@ export const TaskApi = {
     const res = await axios.get<TTaskAllResponse>(URL_TASKS + query);
 
     const data = arrResponseToArrTask(res.data);
+
+    const obj = {
+      ...res,
+      data,
+    };
+    return obj;
+  },
+
+  async getById(id: number) {
+    const res = await axios.get<TTaskByIdResponse>(URL_TASKS + id);
+
+    const data = responseToTask(res.data);
 
     const obj = {
       ...res,

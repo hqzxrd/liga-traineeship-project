@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ChangeEvent, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,11 +6,12 @@ import styles from './TaskForm.module.css';
 import { validationSchema } from './TaskForm.chema';
 import { Button } from 'components/Button';
 import { useTypedSelector } from 'utils/useTypedSelector';
-import { createTaskThunk, updateTaskThunk } from 'store/task/Task.thunk';
+import { createTaskThunk, getByIdTaskThunk, updateTaskThunk } from 'store/task/Task.thunk';
 import { useAppDispatch } from 'store/store';
 import { Input } from 'components/Input/Input';
 import { Checkbox } from 'components/Checkbox/Checkbox';
 import { TTaskForm } from 'types/task.type';
+import Error from 'components/error/Error';
 
 const defaultValues: TTaskForm = {
   name: ``,
@@ -21,7 +22,7 @@ const defaultValues: TTaskForm = {
 
 const TaskForm = () => {
   const dispatch = useAppDispatch();
-  const tasks = useTypedSelector((state) => state.tasks.value);
+  const { value: tasks, error } = useTypedSelector((state) => state.tasks);
   const { id } = useParams();
   const nav = useNavigate();
 
@@ -32,20 +33,21 @@ const TaskForm = () => {
 
   const isCompleted = watch(`isCompleted`);
 
-  const addTask = ({ name, info, isCompleted, isImportant }: TTaskForm) => {
+  const addTask = async ({ name, info, isCompleted, isImportant }: TTaskForm) => {
     if (!name && !info) return;
 
-    dispatch(createTaskThunk({ name, info, isImportant, isCompleted }));
-    nav(`/`, { replace: true });
+    const res = await dispatch(createTaskThunk({ name, info, isImportant, isCompleted }));
+
+    if (res && res.status === 201) nav(`/`, { replace: true });
   };
 
-  const changeTask = ({ name, info, isCompleted, isImportant }: TTaskForm) => {
+  const changeTask = async ({ name, info, isCompleted, isImportant }: TTaskForm) => {
     if (!name && !info) return;
 
     if (id) {
       const taskId = +id;
-      dispatch(updateTaskThunk(taskId, { name, info, isImportant, isCompleted }));
-      nav(`/`, { replace: true });
+      const res = await dispatch(updateTaskThunk(taskId, { name, info, isImportant, isCompleted }));
+      if (res && res.status === 200) nav(`/`, { replace: true });
     }
   };
 
@@ -65,21 +67,35 @@ const TaskForm = () => {
   };
 
   useEffect(() => {
-    if (!id) return;
+    const fetchTaskById = async () => {
+      if (!id) return;
 
-    tasks.forEach((task) => {
-      if (task.id !== +id) return;
+      const res = await dispatch(getByIdTaskThunk(+id));
 
-      setValue(`name`, task.name);
-      setValue(`info`, task.info);
-      setValue(`isImportant`, task.isImportant);
-      setValue(`isCompleted`, task.isCompleted);
-    });
+      if (res?.status !== 200) return;
+
+      setValue(`name`, res.data.name);
+      setValue(`info`, res.data.info);
+      setValue(`isImportant`, res.data.isImportant);
+      setValue(`isCompleted`, res.data.isCompleted);
+    };
+
+    fetchTaskById();
   }, []);
+
+  if (error)
+    return (
+      <Error>
+        <p>{error}</p>
+        <Button>
+          <Link to="/">Back</Link>
+        </Button>
+      </Error>
+    );
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(id ? changeTask : addTask)}>
-      <h4>{id ? `Change` : `Add`} task</h4>
+      <h4 className={styles.head}>{id ? `CHANGE` : `ADD`} TASK</h4>
       <Controller
         control={control}
         name="name"
@@ -97,7 +113,7 @@ const TaskForm = () => {
         render={({ field, fieldState: { error } }) => (
           <div>
             <label htmlFor="info">Description</label>
-            <Input name="info" onChange={onChangeInfoInput} value={field.value} />
+            <Input onChange={onChangeInfoInput} value={field.value} />
 
             <div className={styles.error}>{error?.message}</div>
           </div>

@@ -1,14 +1,15 @@
 .form {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.head {
+  text-align: center;
 }
 
 .button {
   margin-top: 15px;
-}
-
-.error {
-  color: red;
 }
 
 .errorInput {

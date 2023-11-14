@@ -1,12 +1,21 @@
 import { ThunkAction } from 'redux-thunk';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { AnyAction } from 'redux';
-import { deleteTaskAction, errorTaskAction, getAllTaskAction, setLoaderAction } from './Task.action';
+import {
+  deleteTaskAction,
+  errorTaskAction,
+  getAllTaskAction,
+  setCurrentTaskAction,
+  setLoaderAction,
+} from './Task.action';
 import { TaskApi } from 'api/Task.api';
 import { TRootState } from 'store/store';
-import { TTaskForm } from 'types/task.type';
+import { TTask, TTaskForm } from 'types/task.type';
+import { TTaskDeleteResponse } from 'types/api';
 
-export const getAllTaskThunk = (query: string): ThunkAction<Promise<void>, TRootState, unknown, AnyAction> => {
+export const getAllTaskThunk = (
+  query: string
+): ThunkAction<Promise<AxiosResponse<TTask[]> | undefined>, TRootState, unknown, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
@@ -15,6 +24,8 @@ export const getAllTaskThunk = (query: string): ThunkAction<Promise<void>, TRoot
       const res = await TaskApi.getAll(query);
 
       dispatch(getAllTaskAction(res.data));
+
+      return res;
     } catch (err) {
       const error = err as AxiosError;
       dispatch(errorTaskAction(error.message));
@@ -24,11 +35,37 @@ export const getAllTaskThunk = (query: string): ThunkAction<Promise<void>, TRoot
   };
 };
 
-export const createTaskThunk = (task: TTaskForm): ThunkAction<Promise<void>, TRootState, unknown, AnyAction> => {
+export const getByIdTaskThunk = (
+  id: number
+): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, unknown, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
-      await TaskApi.createTask(task);
+
+      const res = await TaskApi.getById(id);
+
+      dispatch(setCurrentTaskAction(res.data));
+
+      return res;
+    } catch (err) {
+      const error = err as AxiosError;
+      if (error.code !== `404`) {
+        dispatch(errorTaskAction(`There is no such task`));
+      } else {
+        dispatch(errorTaskAction(error.message));
+      }
+    }
+  };
+};
+
+export const createTaskThunk = (
+  task: TTaskForm
+): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, unknown, AnyAction> => {
+  return async (dispatch) => {
+    try {
+      dispatch(errorTaskAction(``));
+
+      return await TaskApi.createTask(task);
     } catch (err) {
       const error = err as AxiosError;
       dispatch(errorTaskAction(error.message));
@@ -39,11 +76,12 @@ export const createTaskThunk = (task: TTaskForm): ThunkAction<Promise<void>, TRo
 export const updateTaskThunk = (
   id: number,
   task: TTaskForm
-): ThunkAction<Promise<void>, TRootState, unknown, AnyAction> => {
+): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, unknown, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
-      await TaskApi.updateTask(id, task);
+
+      return await TaskApi.updateTask(id, task);
     } catch (err) {
       const error = err as AxiosError;
       dispatch(errorTaskAction(error.message));
@@ -51,12 +89,18 @@ export const updateTaskThunk = (
   };
 };
 
-export const deleteTaskThunk = (id: number): ThunkAction<Promise<void>, TRootState, unknown, AnyAction> => {
+export const deleteTaskThunk = (
+  id: number
+): ThunkAction<Promise<AxiosResponse<TTaskDeleteResponse> | undefined>, TRootState, unknown, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
+
       const res = await TaskApi.deleteTask(id);
+
       if (res.status === 200) dispatch(deleteTaskAction(id));
+
+      return res;
     } catch (err) {
       const error = err as AxiosError;
       dispatch(errorTaskAction(error.message));

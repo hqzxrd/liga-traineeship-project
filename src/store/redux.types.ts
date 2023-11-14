@@ -1,11 +1,5 @@
-import { TTask } from 'types/task.type';
+import { TTasksReducer } from 'store/task/Task.types';
 
 export type TReduxStore = {
   tasks: TTasksReducer;
-};
-
-export type TTasksReducer = {
-  value: TTask[];
-  isLoading: boolean;
-  error: string;
 };

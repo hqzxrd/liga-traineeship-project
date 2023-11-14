@@ -9,6 +9,7 @@ import { TReduxStore } from './redux.types';
 const initState: TReduxStore = {
   tasks: {
     value: [],
+    current: null,
     isLoading: false,
     error: ``,
   },
@@ -17,7 +18,7 @@ const initState: TReduxStore = {
 const store = createStore(
   rootReducer,
   initState,
-  composeWithDevTools(applyMiddleware<ThunkDispatch<TRootState, undefined, AnyAction>, TRootState>(thunk, logger))
+  composeWithDevTools(applyMiddleware<ThunkDispatch<TRootState, unknown, AnyAction>, TRootState>(thunk, logger))
 );
 
 export type AppDispatch = typeof store.dispatch;

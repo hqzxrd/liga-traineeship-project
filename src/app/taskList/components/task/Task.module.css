@@ -1,4 +1,5 @@
 .task {
+  position: relative;
   margin-top: 5px;
   padding: 5px;
   gap: 5px;
@@ -30,11 +31,23 @@
   gap: 10px;
 }
 
-.lables div {
+.lables > div {
   color: white;
   padding: 0px 10px;
   border-radius: 10px;
-  background-color: #7b68ee;
+  /* background-color: #7b68ee; */
+}
+
+.done {
+  background-color: #1fab89;
+}
+
+.active {
+  background-color: #3282b8;
+}
+
+.important {
+  background-color: #e23e57;
 }
 
 @media (max-width: 768px) {
