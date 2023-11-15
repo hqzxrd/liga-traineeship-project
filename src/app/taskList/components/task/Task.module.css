@@ -1,0 +1,62 @@
+.task {
+  position: relative;
+  margin-top: 5px;
+  padding: 5px;
+  gap: 5px;
+  border-bottom: 1px solid #7b68ee;
+}
+
+.taskWrapper {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.main {
+  word-break: break-all;
+  max-width: 430px;
+  flex: 1;
+}
+
+.taskInteractionBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.lables {
+  display: flex;
+  gap: 10px;
+}
+
+.lables > div {
+  color: white;
+  padding: 0px 10px;
+  border-radius: 10px;
+  /* background-color: #7b68ee; */
+}
+
+.done {
+  background-color: #1fab89;
+}
+
+.active {
+  background-color: #3282b8;
+}
+
+.important {
+  background-color: #e23e57;
+}
+
+@media (max-width: 768px) {
+  .taskInteractionBtns {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .taskInteractionBtns > button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,41 @@
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.customCheckbox {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  outline: none;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.customCheckbox:checked::before {
+  height: 10px;
+  position: absolute;
+  top: -2px;
+  left: 3.5px;
+  content: '\2713';
+  text-align: center;
+  font-size: 12px;
+  color: white;
+}
+
+.customCheckbox:checked {
+  background-color: #7b68ee; /* Change background color when checked */
+}
+
+.customCheckbox:disabled {
+  background-color: #dcdcdc; /* Change background color when checked */
+}
+
+.labelDisabled {
+  color: #dcdcdc;
+}

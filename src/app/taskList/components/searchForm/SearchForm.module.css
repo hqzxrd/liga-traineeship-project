@@ -1,0 +1,42 @@
+.searchForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.searchForm > input {
+  max-width: 100%;
+  flex: 1;
+}
+
+.filterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.filterButtons button {
+  flex: 1;
+}
+
+.searchForm .find {
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .searchForm {
+    flex-direction: column;
+  }
+
+  .searchForm > input {
+    min-height: 34px;
+  }
+
+  .filterButtons {
+    justify-content: space-between;
+  }
+
+  .searchForm .find {
+    margin: 0;
+  }
+}

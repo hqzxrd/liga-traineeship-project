@@ -1,0 +1,14 @@
+.button {
+  background-color: #7b68ee;
+  color: white;
+  min-height: 34px;
+  padding: 0px 5px;
+  border-radius: 5px;
+}
+
+.button:hover {
+}
+
+.button:active {
+  transform: scale(0.99);
+}

@@ -1,0 +1,26 @@
+.search {
+  position: relative;
+  flex: 1;
+}
+
+.searchInput {
+  width: 100%;
+  min-height: 34px;
+  margin-right: 3px;
+  padding-right: 35px;
+  border: none;
+  border: 1px solid #7b68ee;
+  border-radius: 5px;
+}
+
+.searchInput:active {
+}
+
+.reset {
+  color: #7b68ee;
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  border: none;
+  background-color: inherit;
+}
