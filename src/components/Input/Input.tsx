@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import styles from './Input.module.css';
 import { InputProps } from './Input.types';
 
-export function Input({ onClickReset, ...rest }: InputProps) {
+export const Input: FC<InputProps> = ({ onClickReset, inputClassName, ...rest }) => {
   return (
     <div className={styles.search}>
-      <input {...rest} className={styles.searchInput} />
+      <input {...rest} className={`${styles.searchInput} ${inputClassName}`} />
       {onClickReset && (
         <button type="button" className={styles.reset} onClick={() => onClickReset()}>
           <i className="fa fa-close"></i>
@@ -12,4 +13,4 @@ export function Input({ onClickReset, ...rest }: InputProps) {
       )}
     </div>
   );
-}
+};

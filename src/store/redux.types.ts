@@ -1,5 +1,5 @@
-import { TTask } from 'types/task.type';
+import { TTasksReducer } from 'store/task/Task.types';
 
-export interface ReduxStore {
-  tasks: TTask[];
-}
+export type TReduxStore = {
+  tasks: TTasksReducer;
+};

@@ -60,6 +60,7 @@
     "lint-staged": "13.0.1",
     "loader-utils": "3.2.0",
     "mini-css-extract-plugin": "2.6.0",
+    "openapi-typescript": "^6.7.1",
     "postcss-combine-media-query": "1.0.1",
     "postcss-discard-duplicates": "5.1.0",
     "postcss-flexbugs-fixes": "5.0.2",
@@ -92,7 +93,7 @@
     "webpack-merge": "5.8.0"
   },
   "dependencies": {
-    "@hookform/resolvers": "2.9.9",
+    "@hookform/resolvers": "^2.9.9",
     "@mui/material": "5.10.9",
     "@mui/system": "5.10.9",
     "@mui/x-data-grid": "5.17.7",
@@ -112,6 +113,6 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "2.4.2",
     "sanitize.css": "13.0.0",
-    "yup": "0.32.11"
+    "yup": "^0.32.11"
   }
 }

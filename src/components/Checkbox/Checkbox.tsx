@@ -1,10 +1,12 @@
+import { FC } from 'react';
+import styles from './Checkbox.module.css';
 import { CheckboxProps } from './Checkbox.types';
 
-export function Checkbox({ label, checked, onChange, disabled, containerClassName = '' }: CheckboxProps) {
+export const Checkbox: FC<CheckboxProps> = ({ label, checked, onChange, disabled, containerClassName = '' }) => {
   return (
-    <div className={`form-check mb-3 ${containerClassName}`}>
+    <div className={styles.checkboxWrapper}>
       <input
-        className="form-check-input"
+        className={styles.customCheckbox}
         type="checkbox"
         value=""
         id={label}
@@ -12,9 +14,9 @@ export function Checkbox({ label, checked, onChange, disabled, containerClassNam
         checked={checked}
         onChange={onChange}
       />
-      <label className="form-check-label" htmlFor={label}>
+      <label className={disabled ? styles.labelDisabled : ``} htmlFor={label}>
         {label}
       </label>
     </div>
   );
-}
+};
