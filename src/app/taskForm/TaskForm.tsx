@@ -63,6 +63,7 @@ export const TaskForm: FC = () => {
   };
 
   const onChangeCompletedCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) setValue(`isImportant`, false);
     setValue(`isCompleted`, e.target.checked);
   };
 

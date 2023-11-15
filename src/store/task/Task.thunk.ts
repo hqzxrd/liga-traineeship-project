@@ -9,7 +9,7 @@ import { TTaskDeleteResponse } from 'types/api';
 
 export const getAllTaskThunk = (
   query: string
-): ThunkAction<Promise<AxiosResponse<TTask[]> | undefined>, TRootState, unknown, AnyAction> => {
+): ThunkAction<Promise<AxiosResponse<TTask[]> | undefined>, TRootState, void, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
@@ -31,7 +31,7 @@ export const getAllTaskThunk = (
 
 export const getByIdTaskThunk = (
   id: number
-): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, unknown, AnyAction> => {
+): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, void, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
@@ -54,7 +54,7 @@ export const getByIdTaskThunk = (
 
 export const createTaskThunk = (
   task: TTaskForm
-): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, unknown, AnyAction> => {
+): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, void, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
@@ -70,7 +70,7 @@ export const createTaskThunk = (
 export const updateTaskThunk = (
   id: number,
   task: TTaskForm
-): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, unknown, AnyAction> => {
+): ThunkAction<Promise<AxiosResponse<TTask> | undefined>, TRootState, void, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));
@@ -85,7 +85,7 @@ export const updateTaskThunk = (
 
 export const deleteTaskThunk = (
   id: number
-): ThunkAction<Promise<AxiosResponse<TTaskDeleteResponse> | undefined>, TRootState, unknown, AnyAction> => {
+): ThunkAction<Promise<AxiosResponse<TTaskDeleteResponse> | undefined>, TRootState, void, AnyAction> => {
   return async (dispatch) => {
     try {
       dispatch(errorTaskAction(``));

@@ -1,11 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { FC } from 'react';
 import styles from './SearchForm.module.css';
 import { Button } from 'components/button';
 import { Input } from 'components/input';
-import { TSearch, searchSchema } from 'app/taskList/components/searchForm';
+import { TSearch } from 'app/taskList/components/searchForm';
 
 export const SearchForm: FC = () => {
   const [searchParams, setSearchParam] = useSearchParams(``);
@@ -14,7 +13,6 @@ export const SearchForm: FC = () => {
     defaultValues: {
       searchValue: searchParams.get('name_like') ? (searchParams.get('name_like') as string) : ``,
     },
-    resolver: yupResolver(searchSchema),
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
