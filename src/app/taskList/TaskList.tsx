@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
 import styles from './TaskList.module.css';
-import SearchForm from './components/searchForm/SearchForm';
-import List from './components/list/List';
-import { Button } from 'components/Button';
+import { Button } from 'components/button';
+import { List, SearchForm } from 'app/taskList/components';
 
-const TaskList: FC = () => {
+export const TaskList: FC = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -21,5 +20,3 @@ const TaskList: FC = () => {
     </div>
   );
 };
-
-export default TaskList;

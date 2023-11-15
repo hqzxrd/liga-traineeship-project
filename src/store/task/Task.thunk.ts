@@ -1,13 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import { AxiosError, AxiosResponse } from 'axios';
 import { AnyAction } from 'redux';
-import {
-  deleteTaskAction,
-  errorTaskAction,
-  getAllTaskAction,
-  setCurrentTaskAction,
-  setLoaderAction,
-} from './Task.action';
+import { deleteTaskAction, errorTaskAction, getAllTaskAction, setCurrentTaskAction, setLoaderAction } from 'store/task';
 import { TaskApi } from 'api/Task.api';
 import { TRootState } from 'store/store';
 import { TTask, TTaskForm } from 'types/task.type';

@@ -1,4 +1,4 @@
-import { TTaskActions, TTasksReducer, TaskActionsType } from './Task.types';
+import { TTaskActions, TTasksReducer, TaskActionsType } from 'store/task';
 
 const initState: TTasksReducer = {
   value: [],
@@ -7,7 +7,7 @@ const initState: TTasksReducer = {
   error: ``,
 };
 
-const TaskReducer = (state = initState, action: TTaskActions): TTasksReducer => {
+export const TaskReducer = (state = initState, action: TTaskActions): TTasksReducer => {
   switch (action.type) {
     case TaskActionsType.ALL:
       return { ...state, value: action.payload };
@@ -30,5 +30,3 @@ const TaskReducer = (state = initState, action: TTaskActions): TTasksReducer => 
       return state;
   }
 };
-
-export default TaskReducer;

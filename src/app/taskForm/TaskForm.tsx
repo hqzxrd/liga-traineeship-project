@@ -1,17 +1,17 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './TaskForm.module.css';
-import { validationSchema } from './TaskForm.chema';
-import { Button } from 'components/Button';
+import { Button } from 'components/button';
 import { useTypedSelector } from 'utils/useTypedSelector';
 import { createTaskThunk, getByIdTaskThunk, updateTaskThunk } from 'store/task/Task.thunk';
 import { useAppDispatch } from 'store/store';
-import { Input } from 'components/Input/Input';
-import { Checkbox } from 'components/Checkbox/Checkbox';
+import { Input } from 'components/input/Input';
+import { Checkbox } from 'components/checkbox/Checkbox';
 import { TTaskForm } from 'types/task.type';
-import Error from 'components/error/Error';
+import { Error } from 'components/error';
+import { validationSchema } from 'app/taskForm';
 
 const defaultValues: TTaskForm = {
   name: ``,
@@ -20,9 +20,9 @@ const defaultValues: TTaskForm = {
   isImportant: false,
 };
 
-const TaskForm = () => {
+export const TaskForm: FC = () => {
   const dispatch = useAppDispatch();
-  const { value: tasks, error } = useTypedSelector((state) => state.tasks);
+  const { error } = useTypedSelector((state) => state.tasks);
   const { id } = useParams();
   const nav = useNavigate();
 
@@ -151,5 +151,3 @@ const TaskForm = () => {
     </form>
   );
 };
-
-export default TaskForm;

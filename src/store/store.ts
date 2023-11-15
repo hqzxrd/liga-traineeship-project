@@ -3,8 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { useDispatch } from 'react-redux';
-import rootReducer from './rootReducer';
 import { TReduxStore } from './redux.types';
+import { rootReducer } from 'store/rootReducer';
 
 const initState: TReduxStore = {
   tasks: {

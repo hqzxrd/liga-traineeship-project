@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import styles from './Input.module.css';
 import { InputProps } from './Input.types';
 
-export function Input({ onClickReset, inputClassName, ...rest }: InputProps) {
+export const Input: FC<InputProps> = ({ onClickReset, inputClassName, ...rest }) => {
   return (
     <div className={styles.search}>
       <input {...rest} className={`${styles.searchInput} ${inputClassName}`} />
@@ -12,4 +13,4 @@ export function Input({ onClickReset, inputClassName, ...rest }: InputProps) {
       )}
     </div>
   );
-}
+};

@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
 import styles from './Task.module.css';
-import { ITaskProps } from './Task.types';
-import { Button } from 'components/Button';
+import { ITaskProps } from 'app/taskList/components/task';
+import { Button } from 'components/button';
 import { deleteTaskThunk } from 'store/task/Task.thunk';
 import { useAppDispatch } from 'store/store';
 
-const Task: FC<ITaskProps> = ({ task, index }) => {
+export const Task: FC<ITaskProps> = ({ task, index }) => {
   const dispatch = useAppDispatch();
 
   const deleteTask = () => {
@@ -36,5 +36,3 @@ const Task: FC<ITaskProps> = ({ task, index }) => {
     </div>
   );
 };
-
-export default Task;

@@ -3,20 +3,18 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FC } from 'react';
 import styles from './SearchForm.module.css';
+import { Button } from 'components/button';
+import { Input } from 'components/input';
+import { TSearch, searchSchema } from 'app/taskList/components/searchForm';
 
-import { TSearch } from './SearchForm.types';
-import { validationSchema } from './SearchForm.schema';
-import { Button } from 'components/Button';
-import { Input } from 'components/Input/Input';
-
-const SearchForm: FC = () => {
+export const SearchForm: FC = () => {
   const [searchParams, setSearchParam] = useSearchParams(``);
 
   const { setValue, control } = useForm<TSearch>({
     defaultValues: {
       searchValue: searchParams.get('name_like') ? (searchParams.get('name_like') as string) : ``,
     },
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(searchSchema),
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,5 +97,3 @@ const SearchForm: FC = () => {
     </form>
   );
 };
-
-export default SearchForm;

@@ -1,7 +1,8 @@
-import { CheckboxProps } from './Checkbox.types';
+import { FC } from 'react';
 import styles from './Checkbox.module.css';
+import { CheckboxProps } from './Checkbox.types';
 
-export function Checkbox({ label, checked, onChange, disabled, containerClassName = '' }: CheckboxProps) {
+export const Checkbox: FC<CheckboxProps> = ({ label, checked, onChange, disabled, containerClassName = '' }) => {
   return (
     <div className={styles.checkboxWrapper}>
       <input
@@ -18,4 +19,4 @@ export function Checkbox({ label, checked, onChange, disabled, containerClassNam
       </label>
     </div>
   );
-}
+};

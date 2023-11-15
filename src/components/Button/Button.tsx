@@ -1,10 +1,11 @@
-import { ButtonProps } from './Button.types';
+import { FC } from 'react';
 import styles from './Button.module.css';
+import { ButtonProps } from './Button.types';
 
-export function Button({ addClassName, children, ...rest }: ButtonProps) {
+export const Button: FC<ButtonProps> = ({ addClassName, children, ...rest }) => {
   return (
     <button {...rest} className={`${styles.button} ${addClassName}`}>
       {children}
     </button>
   );
-}
+};

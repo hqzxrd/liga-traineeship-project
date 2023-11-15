@@ -1,4 +1,4 @@
-import { TaskActionsType } from './Task.types';
+import { TaskActionsType } from 'store/task';
 import { TTask } from 'types/task.type';
 
 export const setLoaderAction = (isLoading: boolean) => ({ type: TaskActionsType.LOADING, payload: isLoading });

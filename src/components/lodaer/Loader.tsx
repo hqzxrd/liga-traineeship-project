@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { LoaderProps } from './Loader.types';
 import styles from './Loader.module.css';
 
-export function Loader({ variant = 'circle' }: LoaderProps) {
+export const Loader: FC<LoaderProps> = ({ variant = 'circle' }) => {
   const loaderClass = variant === 'dot' ? 'spinner-grow spinner-grow-sm' : 'spinner-border text-primary';
 
   return (
@@ -12,4 +12,4 @@ export function Loader({ variant = 'circle' }: LoaderProps) {
       </div>
     </div>
   );
-}
+};
