@@ -6,7 +6,7 @@ import { Button } from 'components/button';
 import { deleteTaskThunk } from 'store/task/Task.thunk';
 import { useAppDispatch } from 'store/store';
 
-export const Task: FC<ITaskProps> = ({ task, index }) => {
+export const Task: FC<ITaskProps> = ({ task }) => {
   const dispatch = useAppDispatch();
 
   const deleteTask = () => {
@@ -17,7 +17,7 @@ export const Task: FC<ITaskProps> = ({ task, index }) => {
     <div className={styles.task}>
       <div className={styles.taskWrapper}>
         <div className={styles.main}>
-          <h4>№{`${index}. ${task.name}`}</h4>
+          <h4>№{`${task.id}. ${task.name}`}</h4>
           <p>{task.info}</p>
           <div className={styles.lables}>
             {task.isCompleted ? <div className={styles.done}>Done</div> : <div className={styles.active}>Active</div>}

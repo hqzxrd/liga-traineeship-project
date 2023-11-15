@@ -8,13 +8,18 @@ import { getAllTaskThunk } from 'store/task/Task.thunk';
 import { Loader } from 'components/lodaer/Loader';
 import { Error } from 'components/error';
 import { Task } from 'app/taskList/components';
+import { setPageTaskAction } from 'store/task';
 
 export const List: FC = () => {
   const { search } = useLocation();
   const dispatch = useAppDispatch();
-  const { value: tasks, isLoading, error } = useTypedSelector((state) => state.tasks);
+  const { value: tasks, currentPage, perPage, isLoading, error } = useTypedSelector((state) => state.tasks);
+  const lastIndex = Math.ceil(currentPage * perPage);
+  const firstIndex = lastIndex - perPage;
+  const tasksForRender = tasks.slice(firstIndex, lastIndex);
 
   useEffect(() => {
+    dispatch(setPageTaskAction(1));
     dispatch(getAllTaskThunk(search));
   }, [search]);
 
@@ -29,7 +34,7 @@ export const List: FC = () => {
 
   return (
     <div className={styles.tasks}>
-      {tasks.map((task: TTask, i) => {
+      {tasksForRender.map((task: TTask, i) => {
         return <Task key={task.id} index={i + 1} task={task} />;
       })}
     </div>

@@ -3,6 +3,7 @@ import { FC } from 'react';
 import styles from './TaskList.module.css';
 import { Button } from 'components/button';
 import { List, SearchForm } from 'app/taskList/components';
+import { Pagination } from 'components/pagination';
 
 export const TaskList: FC = () => {
   return (
@@ -12,11 +13,13 @@ export const TaskList: FC = () => {
         <SearchForm />
       </header>
 
-      <List />
-
       <Button type="button">
         <Link to="/task_form">New task</Link>
       </Button>
+
+      <List />
+
+      <Pagination />
     </div>
   );
 };

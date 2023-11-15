@@ -1,0 +1,14 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  font-size: 24px;
+}
+
+.pagination div {
+  cursor: pointer;
+}
+
+.active {
+  color: #7b68ee;
+}

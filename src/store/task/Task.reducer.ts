@@ -2,18 +2,18 @@ import { TTaskActions, TTasksReducer, TaskActionsType } from 'store/task';
 
 const initState: TTasksReducer = {
   value: [],
-  current: null,
+  currentPage: 1,
+  perPage: 10,
+  totalTasks: 0,
   isLoading: false,
   error: ``,
 };
 
 export const TaskReducer = (state = initState, action: TTaskActions): TTasksReducer => {
   switch (action.type) {
-    case TaskActionsType.ALL:
-      return { ...state, value: action.payload };
-
-    case TaskActionsType.BY_ID:
-      return { ...state, current: action.payload };
+    case TaskActionsType.ALL: {
+      return { ...state, value: action.payload, totalTasks: action.payload.length };
+    }
 
     case TaskActionsType.DELETE: {
       const filtered = state.value.filter((task) => task.id !== action.payload);
@@ -25,6 +25,10 @@ export const TaskReducer = (state = initState, action: TTaskActions): TTasksRedu
 
     case TaskActionsType.ERROR:
       return { ...state, error: action.payload };
+
+    case TaskActionsType.SET_PAGE: {
+      return { ...state, currentPage: action.payload };
+    }
 
     default:
       return state;

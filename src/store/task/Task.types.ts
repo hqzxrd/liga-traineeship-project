@@ -4,15 +4,15 @@ export type TTaskActions =
   | ITaskSetErrorAction
   | ILoaderSetAction
   | ITaskGetAllAction
-  | ITaskCurrentSetAction
-  | ITaskDeleteAction;
+  | ITaskDeleteAction
+  | ITaskSetPageAction;
 
 export enum TaskActionsType {
-  BY_ID = `GET_BY_ID`,
   ALL = `GET_ALL`,
   DELETE = `DELETE_TASK`,
   LOADING = `SET_LOADING`,
   ERROR = `SET ERROR`,
+  SET_PAGE = `SET_PAGE`,
 }
 
 interface ILoaderSetAction {
@@ -30,21 +30,21 @@ interface ITaskGetAllAction {
   payload: TTask[];
 }
 
-interface ITaskCurrentSetAction {
-  type: TaskActionsType.BY_ID;
-  payload: TTask;
-}
-
 interface ITaskDeleteAction {
   type: TaskActionsType.DELETE;
-  payload: ITaskDeleteId;
+  payload: number;
 }
 
-type ITaskDeleteId = number;
+interface ITaskSetPageAction {
+  type: TaskActionsType.SET_PAGE;
+  payload: number;
+}
 
 export type TTasksReducer = {
   value: TTask[];
-  current: TTask | null;
+  currentPage: number;
+  perPage: number;
+  totalTasks: number;
   isLoading: boolean;
   error: string;
 };
